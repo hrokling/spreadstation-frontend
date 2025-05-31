@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navigation } from './components';
-import { HomePage, InstrumentsPage, DataIngestionPage } from './pages';
+import { Navigation, ProtectedRoute } from './components';
+import { HomePage, InstrumentsPage, DataIngestionPage, LoginPage } from './pages';
 import './App.css';
 
 const App: React.FC = () => {
@@ -11,9 +11,27 @@ const App: React.FC = () => {
         <Navigation />
         <main style={{ padding: '2rem' }}>
           <Routes>
+            {/* Public routes */}
             <Route path='/' element={<HomePage />} />
-            <Route path='/instruments' element={<InstrumentsPage />} />
-            <Route path='/data-ingestion' element={<DataIngestionPage />} />
+            <Route path='/login' element={<LoginPage />} />
+
+            {/* Protected routes */}
+            <Route
+              path='/instruments'
+              element={
+                <ProtectedRoute>
+                  <InstrumentsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/data-ingestion'
+              element={
+                <ProtectedRoute>
+                  <DataIngestionPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>

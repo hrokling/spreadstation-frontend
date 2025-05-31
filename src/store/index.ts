@@ -1,4 +1,5 @@
 // Export all Zustand stores from this directory
 // Example: export { useAuthStore } from './authStore';
 
-export {};
+export { useAuthStore } from './authStore';
+export type { User } from './authStore';
