@@ -1,7 +1,7 @@
 import apiClient from './axiosConfig';
 
 export interface LoginRequest {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -9,11 +9,16 @@ export interface LoginResponse {
     access_token: string;
     refresh_token: string;
     token_type: string;
+    expires_in: number;
     user: {
-        id: string;
-        username: string;
-        email?: string;
-        // Add other user fields as needed based on backend response
+        user_id: number;
+        email: string;
+        role: string;
+        full_name: string;
+        status: string;
+        email_verified: boolean;
+        last_login_at: string;
+        created_at: string;
     };
 }
 

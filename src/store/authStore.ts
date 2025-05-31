@@ -3,9 +3,14 @@ import { persist } from 'zustand/middleware';
 import type { LoginResponse } from '../api/auth';
 
 export interface User {
-    id: string;
-    username: string;
-    email?: string;
+    user_id: number;
+    email: string;
+    role: string;
+    full_name: string;
+    status: string;
+    email_verified: boolean;
+    last_login_at: string;
+    created_at: string;
 }
 
 interface AuthState {

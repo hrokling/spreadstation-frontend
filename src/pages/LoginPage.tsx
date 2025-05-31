@@ -35,13 +35,13 @@ const LoginPage: React.FC = () => {
     // Form setup with validation
     const form = useForm<LoginRequest>({
         initialValues: {
-            username: '',
+            email: '',
             password: '',
         },
         validate: {
-            username: (value) => {
-                if (!value.trim()) return 'Username is required';
-                if (value.length < 2) return 'Username must be at least 2 characters';
+            email: (value) => {
+                if (!value.trim()) return 'Email is required';
+                if (!/^\S+@\S+\.\S+$/.test(value)) return 'Please enter a valid email address';
                 return null;
             },
             password: (value) => {
@@ -54,12 +54,21 @@ const LoginPage: React.FC = () => {
 
     // Handle form submission
     const handleSubmit = async (values: LoginRequest) => {
+        console.log('🔍 Login attempt with values:', values);
+        console.log('🔍 API Base URL:', import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1');
+
         try {
-            await login(values);
+            const result = await login(values);
+            console.log('✅ Login successful:', result);
             // Navigation will happen automatically via useEffect when isAuthenticated becomes true
         } catch (error) {
+            console.error('❌ Login failed:', error);
+            console.error('❌ Error details:', {
+                message: (error as any)?.message,
+                response: (error as any)?.response?.data,
+                status: (error as any)?.response?.status,
+            });
             // Error is handled by the useAuth hook and displayed via loginError
-            console.error('Login failed:', error);
         }
     };
 
@@ -102,10 +111,11 @@ const LoginPage: React.FC = () => {
                             <form onSubmit={form.onSubmit(handleSubmit)}>
                                 <Stack gap="md">
                                     <TextInput
-                                        label="Username"
-                                        placeholder="Enter your username"
+                                        label="Email"
+                                        placeholder="Enter your email address"
                                         required
-                                        {...form.getInputProps('username')}
+                                        type="email"
+                                        {...form.getInputProps('email')}
                                         disabled={isLoginPending}
                                     />
 
