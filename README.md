@@ -1,104 +1,228 @@
 # SpreadStation Frontend
 
-Web-based administration interface for SpreadStation Backend built with React, TypeScript, and Vite.
+A modern React-based web administration interface for the SpreadStation Backend system, providing comprehensive market data and financial instrument management capabilities.
 
-## Quick Start
+## 🚀 Features
 
-### Prerequisites
+- **Instrument Management**: Create, edit, and manage financial instruments
+- **Data Ingestion Control**: Monitor and control market data ingestion processes
+- **Real-time Dashboard**: Live monitoring of system status and data flows
+- **User Authentication**: Secure JWT-based authentication system
+- **Responsive Design**: Modern UI built with Mantine components
+- **Type Safety**: Full TypeScript implementation with strict type checking
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 18+ with TypeScript
+- **Build Tool**: Vite 6.x for fast development and optimized builds
+- **UI Library**: Mantine 8.x for modern, accessible components
+- **Routing**: React Router v6 for client-side navigation
+- **State Management**: Zustand for lightweight, scalable state management
+- **Data Fetching**: TanStack Query (React Query) for server state management
+- **HTTP Client**: Axios for API communication
+- **Code Quality**: ESLint + Prettier for consistent code style
+- **Task Management**: TaskMaster AI for project organization
+
+## 📋 Prerequisites
+
 - Node.js 18+ and npm
-- SpreadStation Backend running on `http://localhost:8000`
-- At least one AI API key for TaskMaster (see setup below)
+- Access to SpreadStation Backend API
+- Modern web browser with ES2020+ support
 
-### 1. Install Dependencies
+## 🚀 Quick Start
+
+### 1. Clone and Install
+
 ```bash
+git clone https://github.com/hrokling/spreadstation-frontend.git
+cd spreadstation-frontend
 npm install
 ```
 
-### 2. Environment Setup
-Copy `env.example` to `.env.local` and add your API keys:
+### 2. Environment Configuration
+
+Create a `.env.local` file in the project root:
+
 ```bash
-cp env.example .env.local
+# Application Configuration
+VITE_APP_NAME=SpreadStation Frontend
+VITE_APP_VERSION=0.1.0
+
+# API Configuration
+VITE_API_BASE_URL=http://localhost:8080/api
+VITE_API_TIMEOUT=30000
+
+# Authentication
+VITE_JWT_STORAGE_KEY=spreadstation_token
+VITE_JWT_REFRESH_KEY=spreadstation_refresh_token
+
+# Features
+VITE_ENABLE_DEBUG=true
+VITE_ENABLE_MOCK_DATA=false
+VITE_LOG_LEVEL=debug
 ```
 
-Edit `.env.local` with your actual API keys:
-```env
-# Frontend
-VITE_API_BASE_URL=http://localhost:8000/api/v1
+### 3. Start Development Server
 
-# TaskMaster AI (at least one required)
-ANTHROPIC_API_KEY=your_actual_anthropic_key
-OPENAI_API_KEY=your_actual_openai_key
-```
-
-### 3. TaskMaster MCP Setup
-
-TaskMaster is already configured in `.cursor/mcp.json`. To activate it:
-
-1. **Update API Keys**: Edit `.cursor/mcp.json` and replace the placeholder API keys with your real ones
-2. **Enable in Cursor**: 
-   - Open Cursor Settings (`Ctrl+Shift+J`)
-   - Click on "MCP" tab on the left
-   - Enable "taskmaster-ai" with the toggle
-3. **Initialize TaskMaster**: In Cursor's AI chat, say:
-   ```
-   Initialize taskmaster-ai in my project
-   ```
-
-### 4. Start Development
 ```bash
 npm run dev
 ```
 
-## TaskMaster Usage
+The application will be available at `http://localhost:5173`
 
-Once TaskMaster is set up, you can use it in Cursor's AI chat:
+## 📜 Available Scripts
 
-- **Parse PRD**: `Can you parse my PRD at scripts/prd.txt?`
-- **Plan next step**: `What's the next task I should work on?`
-- **Implement task**: `Can you help me implement task 3?`
-- **Expand task**: `Can you help me expand task 4?`
+| Script                 | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `npm run dev`          | Start development server with hot reload |
+| `npm run build`        | Build for production                     |
+| `npm run preview`      | Preview production build locally         |
+| `npm run lint`         | Run ESLint to check code quality         |
+| `npm run lint:fix`     | Auto-fix ESLint issues                   |
+| `npm run format`       | Format code with Prettier                |
+| `npm run format:check` | Check code formatting                    |
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-spreadstation-frontend/
-├── .cursor/
-│   └── mcp.json              # TaskMaster MCP configuration
-├── scripts/
-│   └── prd.txt               # TaskMaster-compatible PRD
-├── src/                      # Source code (to be created)
-├── spreadstation-frontend-prd.md  # Detailed PRD
-├── env.example               # Environment variables template
-└── README.md                 # This file
+src/
+├── api/           # API integration and HTTP client setup
+├── components/    # Reusable UI components
+├── hooks/         # Custom React hooks
+├── pages/         # Page components and routing
+├── store/         # Zustand state management stores
+├── types/         # TypeScript type definitions
+├── utils/         # Utility functions and helpers
+├── App.tsx        # Main application component
+└── main.tsx       # Application entry point
+
+tasks/             # TaskMaster AI task management
+scripts/           # Build and deployment scripts
+public/            # Static assets
 ```
 
-## Backend Dependencies
+## 🔧 Environment Variables
 
-Ensure the SpreadStation Backend is running with these endpoints:
-- Authentication: `/api/v1/auth/*`
-- Instruments: `/api/v1/admin/instruments/*`
-- Exchanges: `/api/v1/admin/exchanges/*`
-- Data ingestion: `/api/v1/admin/data/*`
-- Jobs: `/api/v1/admin/jobs/*`
-- System: `/api/v1/health`, `/api/v1/status/*`
+All environment variables must be prefixed with `VITE_` to be accessible in the frontend.
 
-## Getting API Keys
+### Application Configuration
 
-### Anthropic (Claude)
-1. Go to [console.anthropic.com](https://console.anthropic.com)
-2. Create account and get API key from dashboard
+- `VITE_APP_NAME`: Application display name
+- `VITE_APP_VERSION`: Current application version
 
-### OpenAI
-1. Go to [platform.openai.com](https://platform.openai.com)
-2. Create account and get API key from API keys section
+### API Configuration
 
-### Perplexity (Optional, for research)
-1. Go to [perplexity.ai](https://perplexity.ai)
-2. Sign up and get API key from settings
+- `VITE_API_BASE_URL`: SpreadStation Backend API base URL
+- `VITE_API_TIMEOUT`: Request timeout in milliseconds
 
-## Next Steps
+### Authentication
 
-1. Set up your API keys in `.cursor/mcp.json`
-2. Enable TaskMaster in Cursor settings
-3. Initialize TaskMaster in the AI chat
-4. Start implementing tasks from the PRD! 
+- `VITE_JWT_STORAGE_KEY`: Local storage key for JWT tokens
+- `VITE_JWT_REFRESH_KEY`: Local storage key for refresh tokens
+
+### Development Features
+
+- `VITE_ENABLE_DEBUG`: Enable debug logging and features
+- `VITE_ENABLE_MOCK_DATA`: Use mock data instead of real API calls
+- `VITE_LOG_LEVEL`: Logging level (debug, info, warn, error)
+
+## 🏗️ Development Workflow
+
+### Code Quality
+
+- **ESLint**: Configured with React, TypeScript, and Prettier rules
+- **Prettier**: Enforces consistent code formatting
+- **TypeScript**: Strict mode enabled for maximum type safety
+
+### Git Workflow
+
+1. Create feature branches from `main`
+2. Make changes following the established patterns
+3. Run `npm run lint` and `npm run format` before committing
+4. Create pull requests for code review
+
+### Component Development
+
+- Use functional components with hooks
+- Implement proper TypeScript typing
+- Follow Mantine design system patterns
+- Write reusable, composable components
+
+## 🔐 Authentication
+
+The application uses JWT-based authentication with the SpreadStation Backend:
+
+1. **Login**: POST to `/auth/login` with credentials
+2. **Token Storage**: JWT stored in localStorage
+3. **Auto-refresh**: Automatic token refresh before expiration
+4. **Route Protection**: Private routes require valid authentication
+
+## 📊 State Management
+
+### Zustand Stores
+
+- **Auth Store**: User authentication state and actions
+- **Instrument Store**: Financial instrument data and operations
+- **UI Store**: Application UI state and preferences
+
+### TanStack Query
+
+- Server state caching and synchronization
+- Automatic background refetching
+- Optimistic updates for better UX
+
+## 🎨 UI Components
+
+Built with Mantine UI library providing:
+
+- **Consistent Design**: Modern, accessible component library
+- **Dark/Light Themes**: Built-in theme switching
+- **Responsive Layout**: Mobile-first responsive design
+- **Form Handling**: Robust form validation and submission
+
+## 🚀 Deployment
+
+### Production Build
+
+```bash
+npm run build
+```
+
+### Environment-specific Builds
+
+- **Development**: `npm run dev`
+- **Staging**: Configure staging environment variables
+- **Production**: Use production environment variables
+
+### Static Hosting
+
+The built application can be deployed to any static hosting service:
+
+- Vercel, Netlify, AWS S3, etc.
+- Ensure proper routing configuration for SPA
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes following the coding standards
+4. Run tests and linting: `npm run lint && npm run format`
+5. Commit your changes: `git commit -m 'feat: add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request
+
+## 📝 License
+
+This project is part of the SpreadStation system. See the main repository for license information.
+
+## 🆘 Support
+
+For questions and support:
+
+- Check the [TaskMaster tasks](./tasks/) for current development status
+- Review the [PRD document](./spreadstation-frontend-prd.md) for detailed requirements
+- Contact the development team for technical assistance
+
+---
+
+**SpreadStation Frontend** - Modern financial data management interface
