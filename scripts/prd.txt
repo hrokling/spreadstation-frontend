@@ -1,0 +1,92 @@
+SpreadStation Frontend - Product Requirements Document
+
+PROJECT OVERVIEW:
+Build a React-based web administration interface for SpreadStation Backend that enables efficient management of market data, instruments, and system operations.
+
+TECHNICAL STACK:
+- React 18+ with TypeScript
+- Vite build tool  
+- React Router v6
+- Mantine UI components
+- Zustand for global state
+- TanStack Query for server state
+- Axios for HTTP requests
+- JWT authentication
+
+ARCHITECTURE:
+Single Page Application (SPA) consuming SpreadStation Backend REST API at http://localhost:8000/api/v1/
+
+CORE FEATURES TO IMPLEMENT:
+
+1. AUTHENTICATION SYSTEM
+   - JWT-based login/logout flow
+   - Token refresh mechanism
+   - Protected route wrapper
+   - Authorization header management
+
+2. INSTRUMENT MANAGEMENT
+   - Paginated instrument table with search/filter
+   - CRUD operations for instruments
+   - Bulk CSV import functionality
+   - Individual instrument detail views
+   - Status toggle (active/inactive)
+
+3. EXCHANGE MANAGEMENT
+   - Exchange CRUD operations
+   - Holiday calendar management
+   - Bulk holiday import
+
+4. DATA INGESTION CONTROL
+   - Data freshness dashboard
+   - Quick action buttons (fetch yesterday's EOD, specific dates)
+   - Historical data backfill interface
+   - Stale instruments monitoring
+
+5. JOB QUEUE MANAGEMENT
+   - Real-time job monitoring with auto-refresh
+   - Job retry/cancel operations
+   - Queue statistics display
+   - Job detail views
+
+6. SYSTEM ADMINISTRATION
+   - Health monitoring dashboard
+   - Database connection status
+   - Data quality overview
+
+7. SHARED COMPONENTS
+   - Admin layout with sidebar navigation
+   - Reusable data tables with pagination
+   - Status badges and stat cards
+   - Error boundaries and loading states
+   - Confirmation dialogs
+
+DEVELOPMENT PHASES:
+
+Week 1: Foundation (Days 1-7)
+- Project setup with Vite and TypeScript
+- Authentication system implementation
+- Basic instrument management
+- Data ingestion interface basics
+
+Week 2: Advanced Features (Days 8-14)
+- Job queue management
+- Exchange and bulk operations
+- System monitoring
+- Polish and deployment preparation
+
+SUCCESS CRITERIA:
+- All backend API endpoints integrated
+- Responsive UI with proper error handling
+- Real-time updates via polling
+- Optimized performance with pagination
+- Production-ready build configuration
+
+BACKEND DEPENDENCIES:
+- Authentication endpoints (/api/v1/auth/*)
+- Admin instrument endpoints (/api/v1/admin/instruments/*)
+- Exchange management endpoints (/api/v1/admin/exchanges/*)
+- Data ingestion endpoints (/api/v1/admin/data/*)
+- Job management endpoints (/api/v1/admin/jobs/*)
+- System status endpoints (/api/v1/health, /api/v1/status/*)
+
+The frontend must adapt to actual response formats from these backend endpoints. 
