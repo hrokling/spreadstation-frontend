@@ -8,7 +8,8 @@ import {
   LoginPage,
   AnalyticsPage,
   UsersPage,
-  SettingsPage
+  SettingsPage,
+  TestPage
 } from './pages';
 import './App.css';
 
@@ -49,6 +50,7 @@ const App: React.FC = () => {
             <Route path='analytics' element={<AnalyticsPage />} />
             <Route path='users' element={<UsersPage />} />
             <Route path='settings' element={<SettingsPage />} />
+            <Route path='test' element={<TestPage />} />
           </Route>
 
           {/* Legacy protected routes (redirect to admin layout) */}

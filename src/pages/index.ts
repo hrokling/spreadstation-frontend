@@ -8,3 +8,4 @@ export { default as LoginPage } from './LoginPage';
 export { default as AnalyticsPage } from './AnalyticsPage';
 export { default as UsersPage } from './UsersPage';
 export { default as SettingsPage } from './SettingsPage';
+export { default as TestPage } from './TestPage';

@@ -7,7 +7,8 @@ import {
     IconDatabase,
     IconSettings,
     IconUsers,
-    IconFileAnalytics
+    IconFileAnalytics,
+    IconTestPipe
 } from '@tabler/icons-react';
 
 interface NavItem {
@@ -53,6 +54,12 @@ const navItems: NavItem[] = [
         icon: <IconSettings size={20} />,
         href: '/admin/settings',
         description: 'System configuration'
+    },
+    {
+        label: 'Test',
+        icon: <IconTestPipe size={20} />,
+        href: '/admin/test',
+        description: 'Component testing'
     }
 ];
 
