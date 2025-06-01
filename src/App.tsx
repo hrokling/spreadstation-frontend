@@ -1,39 +1,79 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navigation, ProtectedRoute } from './components';
-import { HomePage, InstrumentsPage, DataIngestionPage, LoginPage } from './pages';
+import { Navigation, ProtectedRoute, AdminLayout } from './components';
+import {
+  HomePage,
+  InstrumentsPage,
+  DataIngestionPage,
+  LoginPage,
+  AnalyticsPage,
+  UsersPage,
+  SettingsPage
+} from './pages';
 import './App.css';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className='app'>
-        <Navigation />
-        <main style={{ padding: '2rem' }}>
-          <Routes>
-            {/* Public routes */}
-            <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={<LoginPage />} />
+        <Routes>
+          {/* Public routes with simple navigation */}
+          <Route path='/login' element={
+            <>
+              <Navigation />
+              <main style={{ padding: '2rem' }}>
+                <LoginPage />
+              </main>
+            </>
+          } />
 
-            {/* Protected routes */}
-            <Route
-              path='/instruments'
-              element={
-                <ProtectedRoute>
-                  <InstrumentsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='/data-ingestion'
-              element={
-                <ProtectedRoute>
-                  <DataIngestionPage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </main>
+          {/* Public home route with simple navigation */}
+          <Route path='/' element={
+            <>
+              <Navigation />
+              <main style={{ padding: '2rem' }}>
+                <HomePage />
+              </main>
+            </>
+          } />
+
+          {/* Protected routes with admin layout */}
+          <Route path='/admin' element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<HomePage />} />
+            <Route path='instruments' element={<InstrumentsPage />} />
+            <Route path='data-ingestion' element={<DataIngestionPage />} />
+            <Route path='analytics' element={<AnalyticsPage />} />
+            <Route path='users' element={<UsersPage />} />
+            <Route path='settings' element={<SettingsPage />} />
+          </Route>
+
+          {/* Legacy protected routes (redirect to admin layout) */}
+          <Route
+            path='/instruments'
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<InstrumentsPage />} />
+          </Route>
+
+          <Route
+            path='/data-ingestion'
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<DataIngestionPage />} />
+          </Route>
+        </Routes>
       </div>
     </BrowserRouter>
   );
